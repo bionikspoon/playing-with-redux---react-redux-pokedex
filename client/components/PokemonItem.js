@@ -11,18 +11,18 @@ export default class PokemonItem extends React.Component {
     const { pokemon, caught, actions } = this.props;
     return (
       <tr className={caught ? 'success' : ''}>
-        <td>{ pokemon.name }</td>
-        <td>{ pokemon.type }</td>
-        <td>{ pokemon.stage }</td>
-        <td>{ pokemon.species }</td>
+        <td>{ pokemon.get('name') }</td>
+        <td>{ pokemon.get('type') }</td>
+        <td>{ pokemon.get('stage') }</td>
+        <td>{ pokemon.get('species') }</td>
         <td>
           { caught ?
 
             'Caught!' :
 
-            <button className="btn btn-primary"
+            <button className="btn btn-primary btn-xs"
                     type="button"
-                    onClick={ ()=> actions.markCaught(pokemon.name) }>Catch</button> }
+                    onClick={ ()=> actions.markCaught(pokemon.get('name')) }>Catch</button> }
         </td>
       </tr>
     );

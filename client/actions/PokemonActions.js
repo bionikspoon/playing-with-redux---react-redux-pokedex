@@ -5,7 +5,6 @@ export function searchTermChanged(searchInput) {
 }
 
 export function markCaught(name) {
-  console.log('markCaught: catching', name);
   return {
     type: 'MARK_CAUGHT', payload: name
   };

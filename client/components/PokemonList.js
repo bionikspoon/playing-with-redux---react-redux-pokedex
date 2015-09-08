@@ -24,9 +24,9 @@ export default class PokemonList extends React.Component {
         <tbody>
         {pokemon.map(
             pokemonObject =>
-            <PokemonItem key={pokemonObject.name}
+            <PokemonItem key={pokemonObject.get('name')}
                          pokemon={pokemonObject}
-                         caught={caughtPokemon.indexOf(pokemonObject.name) > -1}
+                         caught={caughtPokemon.indexOf(pokemonObject.get('name')) !== -1}
                          actions={actions} />)}
         </tbody>
       </table>

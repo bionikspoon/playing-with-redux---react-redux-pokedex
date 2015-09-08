@@ -1,21 +1,21 @@
 import { createReducer } from 'utils/index';
 import PokemonInitialData from 'constants/PokemonInitialData';
 import Immutable from 'immutable';
-
+const PokemonList = Immutable.fromJS(PokemonInitialData);
 const initialState = Immutable.Map(
   {
-    pokemon: PokemonInitialData, searchTerm: '', caughtPokemon: []
+    pokemon: PokemonList, searchTerm: '', caughtPokemon: Immutable.List()
   });
 
 function filterPokemon(searchTerm = this.get('searchTerm')) {
-  let filtered = PokemonInitialData;
-  if (searchTerm) {
-    filtered = PokemonInitialData.filter(
-        pokemon => pokemon.name.toLowerCase().indexOf(searchTerm.toLowerCase())
-      > -1);
+  if (!searchTerm) {
+    return PokemonList;
   }
-  return filtered;
+  return PokemonList.filter(
+      pokemon => pokemon.get('name').toLowerCase().indexOf(searchTerm.toLowerCase())
+    > -1);
 }
+
 export default createReducer(
   initialState,
 
@@ -29,10 +29,8 @@ export default createReducer(
     },
 
     ['MARK_CAUGHT']: (state, payload) => {
-      return state.set(
-        'caughtPokemon', [
-          ...(state.get('caughtPokemon')), payload
-        ]);
+      return state.setIn(
+        ['caughtPokemon'], state.get('caughtPokemon').push(payload));
     }
   });
 
