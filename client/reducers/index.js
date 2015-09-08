@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import counter from 'reducers/counter';
-import pokemon from 'reducers/pokemon';
+import PokemonReducer from 'reducers/PokemonReducer';
 
 export default combineReducers({
   counter,
-  pokemon
+  PokemonReducer
 });

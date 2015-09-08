@@ -2,10 +2,10 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import FilterPokemon from 'components/FilterPokemon';
 import PokemonList from 'components/PokemonList';
-import * as PokemonActions from 'actions/pokemon';
+import * as PokemonActions from 'actions/PokemonActions';
 
 
-@connect(state => state.pokemon,
+@connect(state => state.PokemonReducer,
          PokemonActions,
          (data, actions, props) =>({data, actions, ...props})
 )

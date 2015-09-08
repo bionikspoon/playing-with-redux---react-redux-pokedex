@@ -1,16 +1,16 @@
 import { createReducer } from 'utils/index';
-import PokemonList from 'constants/pokemon-list';
+import PokemonInitialData from 'constants/PokemonInitialData';
 
 const initialState = {
-  pokemon: PokemonList,
+  pokemon: PokemonInitialData,
   searchTerm: '',
   caughtPokemon: []
 };
 
 function filterPokemon(searchTerm = this.searchTerm) {
-  let filtered = PokemonList;
+  let filtered = PokemonInitialData;
   if (searchTerm) {
-    filtered = PokemonList.filter(
+    filtered = PokemonInitialData.filter(
         pokemon => pokemon.name.toLowerCase().indexOf(searchTerm.toLowerCase())
       > -1);
   }
