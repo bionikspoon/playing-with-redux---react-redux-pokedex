@@ -5,10 +5,10 @@ import PokemonList from 'components/PokemonList';
 import * as PokemonActions from 'actions/PokemonActions';
 
 
-@connect(state => state.PokemonReducer,
-         PokemonActions,
-         (data, actions, props) =>({data, actions, ...props})
-)
+@connect(
+    state => ({props: state.PokemonReducer}),
+    PokemonActions,
+    (data, actions, props) =>({data: data.props, actions, ...props}))
 export default class HomeView extends React.Component {
   static propTypes = {
     data: React.PropTypes.object.isRequired,
@@ -22,7 +22,6 @@ export default class HomeView extends React.Component {
 
   render() {
     const { data, actions  } = this.props;
-    console.log(this.props);
     return (
       <section className='container text-center'>
         <div className="row">
@@ -31,8 +30,8 @@ export default class HomeView extends React.Component {
             <h1>Pokedex in Redux</h1>
             <FilterPokemon actions={actions} />
 
-            <PokemonList pokemon={ data.pokemon }
-                         caughtPokemon={data.caughtPokemon}
+            <PokemonList pokemon={ data.get('pokemon')}
+                         caughtPokemon={data.get('caughtPokemon')}
                          actions={actions} />
           </div>
         </div>

@@ -1,11 +1,11 @@
 import { createReducer } from 'utils/index';
 import PokemonInitialData from 'constants/PokemonInitialData';
+import Immutable from 'immutable';
 
-const initialState = {
-  pokemon: PokemonInitialData,
-  searchTerm: '',
-  caughtPokemon: []
-};
+const initialState = Immutable.Map(
+  {
+    pokemon: PokemonInitialData, searchTerm: '', caughtPokemon: []
+  });
 
 function filterPokemon(searchTerm = this.searchTerm) {
   let filtered = PokemonInitialData;
@@ -16,22 +16,22 @@ function filterPokemon(searchTerm = this.searchTerm) {
   }
   return filtered;
 }
-export default createReducer(initialState, {
-  ['SEARCH_INPUT_CHANGED']: (state, payload) => {
-    return {
-      ...state,
-      searchTerm: payload,
-      pokemon: state::filterPokemon(payload)
-    };
-  },
+export default createReducer(
+  initialState,
 
-  ['MARK_CAUGHT']: (state, payload) => {
-    return {
-      ...state,
-      caughtPokemon: [
-        ...state.caughtPokemon, payload
-      ]
-    };
-  }
-});
+  {
+    ['SEARCH_INPUT_CHANGED']: (state, payload) => {
+      return state.merge(
+        {
+          searchTerm: payload, pokemon: state::filterPokemon(payload)
+        });
+    },
+
+    ['MARK_CAUGHT']: (state, payload) => {
+      return state.set(
+        'caughtPokemon', [...(state.get('caughtPokemon')),
+          payload
+        ]);
+    }
+  });
 

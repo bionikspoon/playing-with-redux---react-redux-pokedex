@@ -10,7 +10,6 @@ export default class PokemonList extends React.Component {
 
   render() {
     const { pokemon, caughtPokemon, actions } = this.props;
-
     return (
       <table className="table table-striped">
         <thead>
@@ -23,11 +22,12 @@ export default class PokemonList extends React.Component {
         </tr>
         </thead>
         <tbody>
-        {pokemon.map(pokemonObject =>
-          <PokemonItem key={pokemonObject.name}
-                       pokemon={pokemonObject}
-                       caught={caughtPokemon.indexOf(pokemonObject.name) > -1}
-                       actions={actions} />)}
+        {pokemon.map(
+            pokemonObject =>
+            <PokemonItem key={pokemonObject.name}
+                         pokemon={pokemonObject}
+                         caught={caughtPokemon.indexOf(pokemonObject.name) > -1}
+                         actions={actions} />)}
         </tbody>
       </table>
     );
