@@ -3,7 +3,7 @@ import React from 'react';
 export default class FilterPokemon extends React.Component {
   static propTypes = {
     onSearchTermChanged: React.PropTypes.func.isRequired
-  }
+  };
 
   render() {
     const { onSearchTermChanged} = this.props;

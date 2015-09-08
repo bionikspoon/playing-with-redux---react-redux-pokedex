@@ -8,7 +8,6 @@ const initialState = {
 };
 
 function filterPokemon(searchTerm = this.searchTerm) {
-  console.log('fitlerPokemon', this);
   let filtered = PokemonList;
   if (searchTerm) {
     filtered = PokemonList.filter(
@@ -23,6 +22,15 @@ export default createReducer(initialState, {
       ...state,
       searchTerm: payload,
       pokemon: state::filterPokemon(payload)
+    };
+  },
+
+  ['MARK_CAUGHT']: (state, payload) => {
+    return {
+      ...state,
+      caughtPokemon: [
+        ...state.caughtPokemon, payload
+      ]
     };
   }
 });

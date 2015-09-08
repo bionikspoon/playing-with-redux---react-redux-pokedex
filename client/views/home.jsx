@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import FilterPokemon from 'components/FilterPokemon';
 import PokemonList from 'components/PokemonList';
 import * as PokemonActions from 'actions/pokemon';
+import {bindActionCreators} from 'redux';
 
 
 @connect(state => ({
@@ -24,7 +25,8 @@ export default class HomeView extends React.Component {
 
 
   render() {
-    const { data } = this.props;
+    const { pokemon, caughtPokemon  } = this.props.data;
+    const actions = bindActionCreators(PokemonActions, this.props.dispatch);
 
     return (
       <section className='container text-center'>
@@ -33,7 +35,9 @@ export default class HomeView extends React.Component {
 
             <h1>Pokedex in Redux</h1>
             <FilterPokemon onSearchTermChanged={ this::this._searchTermChanged } />
-            <PokemonList pokemon={ data.pokemon } />
+            <PokemonList pokemon={ pokemon }
+                         caughtPokemon={caughtPokemon}
+                         actions={actions} />
           </div>
         </div>
       </section>
