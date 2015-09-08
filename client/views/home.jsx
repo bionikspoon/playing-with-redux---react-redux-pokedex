@@ -19,10 +19,6 @@ export default class HomeView extends React.Component {
     super();
   }
 
-  _searchTermChanged(searchTerm) {
-    this.props.dispatch(PokemonActions.searchTermChanged(searchTerm));
-  }
-
 
   render() {
     const { pokemon, caughtPokemon  } = this.props.data;
@@ -34,10 +30,9 @@ export default class HomeView extends React.Component {
           <div className="col-sm-8 col-sm-offset-2">
 
             <h1>Pokedex in Redux</h1>
-            <FilterPokemon onSearchTermChanged={ this::this._searchTermChanged } />
-            <PokemonList pokemon={ pokemon }
-                         caughtPokemon={caughtPokemon}
-                         actions={actions} />
+            <FilterPokemon actions={actions} /> <PokemonList pokemon={ pokemon }
+                                                             caughtPokemon={caughtPokemon}
+                                                             actions={actions} />
           </div>
         </div>
       </section>

@@ -2,11 +2,11 @@ import React from 'react';
 
 export default class FilterPokemon extends React.Component {
   static propTypes = {
-    onSearchTermChanged: React.PropTypes.func.isRequired
+    actions: React.PropTypes.object.isRequired
   };
 
   render() {
-    const { onSearchTermChanged} = this.props;
+    const { actions } = this.props;
     return (
       <form >
         <div className='form-group'>
@@ -15,7 +15,7 @@ export default class FilterPokemon extends React.Component {
                  className='form-control'
                  placeholder='Search Pokedex'
                  value={this.searchTerm}
-                 onChange={e => onSearchTermChanged(e.target.value)} />
+                 onChange={e => actions.searchTermChanged(e.target.value)} />
         </div>
       </form>
     );
