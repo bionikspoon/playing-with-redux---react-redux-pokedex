@@ -1,35 +1,41 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import FilterPokemon from 'components/FilterPokemon';
+import PokemonList from 'components/PokemonList';
+import * as PokemonActions from 'actions/PokemonActions';
 
-@connect(state => ({
-  counter : state.counter
-}))
+
+@connect(
+    state => ({props: state.PokemonReducer}),
+    PokemonActions,
+    (data, actions, props) =>({data: data.props, actions, ...props}))
 export default class HomeView extends React.Component {
   static propTypes = {
-    dispatch : React.PropTypes.func.isRequired,
-    counter  : React.PropTypes.number.isRequired
-  }
+    data: React.PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired
+  };
 
-  constructor () {
+  constructor() {
     super();
   }
 
-  // normally you'd import an action creator, but I don't want to create
-  // a file that you're just going to delete anyways!
-  _increment () {
-    this.props.dispatch({ type : 'COUNTER_INCREMENT' });
-  }
 
-  render () {
+  render() {
+    const { data, actions  } = this.props;
     return (
-      <div className='container text-center'>
-        <h1>Welcome to the React Redux Starter Kit</h1>
-        <h2>Sample Counter: {this.props.counter}</h2>
-        <button className='btn btn-default'
-                onClick={::this._increment}>
-          Increment
-        </button>
-      </div>
+      <section className='container text-center'>
+        <div className="row">
+          <div className="col-sm-8 col-sm-offset-2">
+
+            <h1>Pokedex in Redux</h1>
+            <FilterPokemon actions={actions} />
+
+            <PokemonList pokemon={ data.get('pokemon')}
+                         caughtPokemon={data.get('caughtPokemon')}
+                         actions={actions} />
+          </div>
+        </div>
+      </section>
     );
   }
 }

@@ -10,7 +10,7 @@ if (__DEBUG__) {
   createStoreWithMiddleware = createStore;
 }
 
-export default function configureStore (initialState) {
+export default function configureStore(initialState) {
   const store = createStoreWithMiddleware(rootReducer, initialState);
 
   if (module.hot) {

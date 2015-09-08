@@ -11,7 +11,7 @@ const store = configureStore();
 export default class Root extends React.Component {
   static propTypes = {
     initialState : React.PropTypes.object
-  }
+  };
 
   constructor () {
     super();
