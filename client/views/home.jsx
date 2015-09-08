@@ -6,13 +6,13 @@ import * as PokemonActions from 'actions/pokemon';
 
 
 @connect(state => ({
-  store: state.pokemon
+  data: state.pokemon
 }))
 export default class HomeView extends React.Component {
   static propTypes = {
     dispatch: React.PropTypes.func.isRequired,
-    store: React.PropTypes.object.isRequired
-  }
+    data: React.PropTypes.object.isRequired
+  };
 
   constructor() {
     super();
@@ -24,16 +24,16 @@ export default class HomeView extends React.Component {
 
 
   render() {
-    const { store} = this.props;
+    const { data } = this.props;
 
     return (
       <section className='container text-center'>
         <div className="row">
-          <div className="col-sm-6 col-sm-offset-3">
+          <div className="col-sm-8 col-sm-offset-2">
 
             <h1>Pokedex in Redux</h1>
-            <FilterPokemon onSearchTermChanged={this::this._searchTermChanged} />
-            <PokemonList store={store} />
+            <FilterPokemon onSearchTermChanged={ this::this._searchTermChanged } />
+            <PokemonList pokemon={ data.pokemon } />
           </div>
         </div>
       </section>
