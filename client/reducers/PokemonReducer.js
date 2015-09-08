@@ -7,7 +7,7 @@ const initialState = Immutable.Map(
     pokemon: PokemonInitialData, searchTerm: '', caughtPokemon: []
   });
 
-function filterPokemon(searchTerm = this.searchTerm) {
+function filterPokemon(searchTerm = this.get('searchTerm')) {
   let filtered = PokemonInitialData;
   if (searchTerm) {
     filtered = PokemonInitialData.filter(
@@ -21,16 +21,17 @@ export default createReducer(
 
   {
     ['SEARCH_INPUT_CHANGED']: (state, payload) => {
-      return state.merge(
-        {
-          searchTerm: payload, pokemon: state::filterPokemon(payload)
-        });
+      return state
+
+        .set('searchTerm', payload)
+
+        .set('pokemon', state::filterPokemon(payload));
     },
 
     ['MARK_CAUGHT']: (state, payload) => {
       return state.set(
-        'caughtPokemon', [...(state.get('caughtPokemon')),
-          payload
+        'caughtPokemon', [
+          ...(state.get('caughtPokemon')), payload
         ]);
     }
   });
